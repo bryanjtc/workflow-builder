@@ -26,7 +26,7 @@ import { Edit, Trash } from "lucide-react";
 import moment from "moment";
 
 export default function Page() {
-  const { userId } = useAuth();
+  const userId = 1;
   const clients = useQuery(api.clients.getClients, {
     ownerId: userId!,
   });

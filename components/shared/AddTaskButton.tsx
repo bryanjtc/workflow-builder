@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -36,7 +35,7 @@ const formSchema = z.object({
 
 export default function AddTaskButton() {
   const [open, setOpen] = useState(false);
-  const { userId } = useAuth();
+  const userId = 1;
   const addTask = useMutation(api.tasks.addTask);
 
   const form = useForm({

@@ -24,10 +24,11 @@ import { Input } from "@/components/ui/input";
 import useWorkflow from "../store/workflow";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { useUser } from "@clerk/nextjs";
 
 function NodeAuthentication() {
-  const { user } = useUser();
+  const user = {
+    id: 1
+  };
   const { selectedNode, updateNodeData, getNodeInfo } = useWorkflow(
     (state) => ({
       selectedNode: state.selectedNode,

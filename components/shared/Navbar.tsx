@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { SignOutButton, UserButton } from "@clerk/nextjs";
 
 const navLinks = [
   {
@@ -115,7 +114,6 @@ function Navbar() {
             />
           </div>
         </form>
-        <UserButton userProfileUrl="/settings" />
       </div>
     </header>
   );

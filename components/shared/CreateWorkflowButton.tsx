@@ -11,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -29,24 +28,24 @@ import { api } from "@/convex/_generated/api";
 import { useState } from "react";
 
 const formSchema = z.object({
-  title: z.string({ message: "Workflow Name is required" })
+  title: z.string({ message: "Workflow Name is required" }),
 });
 
 export default function CreateWorkflowButton() {
   const [open, setOpen] = useState(false);
-  const { userId } = useAuth();
-  const addWorkflow = useMutation(api.workflows.addWorkflow);
+  const userId = 1;
+  const addWorkflow = () => {};
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: {title: ""},
-    resetOptions: {keepDefaultValues: true}
+    defaultValues: { title: "" },
+    resetOptions: { keepDefaultValues: true },
   });
 
   const onSubmit = async (values: any) => {
     await addWorkflow({ ...values, ownerId: userId! });
-    setOpen(false)
-    form.reset()
+    setOpen(false);
+    form.reset();
   };
   return (
     <Dialog onOpenChange={setOpen} open={open}>

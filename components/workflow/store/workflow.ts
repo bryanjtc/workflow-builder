@@ -32,7 +32,7 @@ type Workflow = {
   updateNodeData: (data: NodeProps["data"]) => void;
   onNodesChange: (props: NodeChange[]) => void;
   updateWorkflow: (data: IWorkflow) => void;
-  getNodeInfo: (name: string) => INodeDescription|undefined
+  getNodeInfo: (name: string) => INodeDescription | undefined;
 };
 
 const useWorkflow = create<Workflow>((set, get) => ({
@@ -40,7 +40,20 @@ const useWorkflow = create<Workflow>((set, get) => ({
   active: false,
   availableNodes: Nodes,
   selectedNode: null,
-  nodes: [],
+  nodes: [
+    {
+      id: "1",
+      position: {
+        x: 250,
+        y: 5,
+      },
+      data: {
+        label: `Action`,
+        description: "Add an action to be performed",
+      },
+      type: "action",
+    },
+  ],
   connections: [],
   addNode(prevNodeId) {
     const prevNode = get().nodes.find((node) => node.id === prevNodeId)!;
@@ -108,14 +121,25 @@ const useWorkflow = create<Workflow>((set, get) => ({
       selectedNode: state.selectedNode
         ? {
             ...state.selectedNode,
-            data: { ...state.selectedNode?.data, ...data, params: {...state.selectedNode.data.params, ...data.params} },
+            data: {
+              ...state.selectedNode?.data,
+              ...data,
+              params: { ...state.selectedNode.data.params, ...data.params },
+            },
           }
         : null,
     }));
     set((state) => ({
       nodes: state.nodes.map((n) =>
         n.id === state.selectedNode?.id
-          ? { ...n, data: { ...n.data, ...data, params: {...state.selectedNode.data.params, ...data.params} } }
+          ? {
+              ...n,
+              data: {
+                ...n.data,
+                ...data,
+                params: { ...state.selectedNode.data.params, ...data.params },
+              },
+            }
           : n
       ),
     }));
@@ -152,9 +176,9 @@ const useWorkflow = create<Workflow>((set, get) => ({
     console.log(workflowData.connections);
     set((state) => ({ ...state, ...workflowData }));
   },
-  getNodeInfo(name){
-    return get().availableNodes.find(n => n.name === name);
-  }
+  getNodeInfo(name) {
+    return get().availableNodes.find((n) => n.name === name);
+  },
 }));
 
 export default useWorkflow;

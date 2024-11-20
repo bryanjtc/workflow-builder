@@ -24,13 +24,12 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { api } from "@/convex/_generated/api";
 import AddTaskButton from "@/components/shared/AddTaskButton";
 import { useMutation, useQuery } from "convex/react";
-import { useAuth } from "@clerk/nextjs";
 import ConfirmModal from "@/components/modal/ConfirmModal";
 import { Button } from "@/components/ui/button";
 import { Edit, Trash } from "lucide-react";
 
 export default function Page() {
-  const { userId } = useAuth();
+  const userId = 1;
   const tasks = useQuery(api.tasks.getTasks, {
     ownerId: userId!,
   });
