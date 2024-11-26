@@ -42,16 +42,12 @@ const useWorkflow = create<Workflow>((set, get) => ({
   selectedNode: null,
   nodes: [
     {
-      id: "1",
-      position: {
-        x: 250,
-        y: 5,
-      },
+      id: `node-${uuid()}`,
+      position: { x: 0, y: 0 },
       data: {
-        label: `Action`,
-        description: "Add an action to be performed",
+        label: "Trigger",
       },
-      type: "action",
+      type: "trigger",
     },
   ],
   connections: [],
